@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Person from './Person/Person';
-import './App.css';
+import classes from './App.css';
 import styled from 'styled-components'
 
 const StyledButton = styled.button`
@@ -60,6 +60,7 @@ class App extends Component {
 
     render() {
         let persons = null;
+        let btnClasses = '';
 
         if (this.state.showPersons) {
             persons = (
@@ -75,21 +76,24 @@ class App extends Component {
                     })}
                 </div>
             );
+
+            btnClasses = classes.Red;
         }
 
-        const classes = [];
+        const assignedClasses = [];
         if (this.state.persons.length !== 0) {
-            classes.push('red');
+            assignedClasses.push(classes.red);
         }
 
         if (this.state.persons.length === 0) {
-            classes.push('bold');
+            assignedClasses.push(classes.bold);
         }
 
         return (
-            <div className="App">
-                <p className={classes.join(' ')}>Hello world</p>
-                <StyledButton alt={this.state.showPersons} onClick={this.togglePersonsHandler}>Toggle Persons</StyledButton>
+            <div className={classes.App}>
+                <p className={assignedClasses.join(' ')}>Hello world</p>
+                {/* <StyledButton alt={this.state.showPersons} onClick={this.togglePersonsHandler}>Toggle Persons</StyledButton> */}
+                <button className={btnClasses} onClick={this.togglePersonsHandler}>Toggle Persons</button>
                 {persons}
             </div>
         );
