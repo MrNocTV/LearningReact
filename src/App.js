@@ -4,7 +4,7 @@ import './App.css';
 import styled from 'styled-components'
 
 const StyledButton = styled.button`
-    background-color: green;
+    background-color: ${props => props.alt ? 'red' : 'green'};
     color: white;
     font: inherit;
     border: 1px solid blue;
@@ -12,7 +12,7 @@ const StyledButton = styled.button`
     cursor: pointer;
     
     &:hover {
-        background-color: lightgreen;
+        background-color: ${props => props.alt ? 'salmon' : 'lightgreen'};
         color: black;
     }
 `
@@ -61,10 +61,6 @@ class App extends Component {
     render() {
         let persons = null;
 
-        const style = {
-
-        }
-
         if (this.state.showPersons) {
             persons = (
                 <div>
@@ -79,12 +75,6 @@ class App extends Component {
                     })}
                 </div>
             );
-
-            style.backgroundColor = 'red';
-            style[':hover'] = {
-                backgroundColor: 'salmon',
-                color: 'black'
-            }
         }
 
         const classes = [];
@@ -99,7 +89,7 @@ class App extends Component {
         return (
             <div className="App">
                 <p className={classes.join(' ')}>Hello world</p>
-                <StyledButton style={style} onClick={this.togglePersonsHandler}>Toggle Persons</StyledButton>
+                <StyledButton alt={this.state.showPersons} onClick={this.togglePersonsHandler}>Toggle Persons</StyledButton>
                 {persons}
             </div>
         );
