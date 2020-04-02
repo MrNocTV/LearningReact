@@ -8,7 +8,8 @@ class App extends Component {
             { name: 'Loc', age: 25 },
             { name: 'Trang', age: 29 }
             ],
-        otherState: 'other state'
+        otherState: 'other state',
+        showPersons: false
     }
 
     switchNameHandler = (newName) => {
@@ -29,13 +30,29 @@ class App extends Component {
         });
     }
 
+    togglePersonsHandler = () => {
+        const doesShow = this.state.showPersons;
+        this.setState({showPersons: !doesShow});
+    }
+
     render() {
+        let persons = null;
+
+        if (this.state.showPersons) {
+            persons = (                 
+                <div>
+                    {this.state.persons.map(person => {
+                        return <Person name={person.name} age={person.age} change={this.changeNameHandler}/>
+                    })};
+                </div>
+            ); 
+        }
+
         return (
             <div className="App">
                 <h1>Hello world</h1>
-                <button onClick={this.switchNameHandler.bind(this, 'FUCK')}>Switch Name</button>
-                <Person name={this.state.persons[0].name} age={this.state.persons[0].age} change={this.changeNameHandler}/>
-                <Person name={this.state.persons[1].name} age={this.state.persons[1].age}>Fuho</Person>
+                <button onClick={this.togglePersonsHandler}>Switch Name</button>
+                {persons}
             </div>
         );
     }
