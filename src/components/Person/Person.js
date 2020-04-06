@@ -18,9 +18,9 @@ const StyledDiv = styled.div`
 
 const person = (props) => {
 
-    if (Math.random() > 0.7) {
-        throw new Error('Something went wrong');
-    }
+    // if (Math.random() > 0.7) {
+    //     throw new Error('Something went wrong');
+    // }
 
     return (
         // <div className="Person" style={style}>

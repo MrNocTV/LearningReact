@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import Person from './Person/Person';
+import Person from '../../components/Person/Person';
 import classes from './App.css';
 import styled from 'styled-components'
-import ErrorBoundary from './ErrorBoundry/ErrorBoundry';
+import ErrorBoundary from '../../ErrorBoundry/ErrorBoundry';
 
 const StyledButton = styled.button`
     background-color: ${props => props.alt ? 'red' : 'green'};
@@ -30,7 +30,7 @@ class App extends Component {
     }
 
     changeNameHandler = (event, id) => {
-        const personIndex = this.state.persons.findIndex(person => person.userId === id);
+        const personIndex = this.state.persons.findIndex(person => person.id === id);
 
         if (personIndex === undefined && personIndex === null) {
             return;
