@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Person from './Person/Person';
 import classes from './App.css';
 import styled from 'styled-components'
+import ErrorBoundary from './ErrorBoundry/ErrorBoundry';
 
 const StyledButton = styled.button`
     background-color: ${props => props.alt ? 'red' : 'green'};
@@ -29,9 +30,8 @@ class App extends Component {
     }
 
     changeNameHandler = (event, id) => {
-        console.log('change ' + id);
-        const personIndex = this.state.persons.findIndex(person => person.id === id);
-        console.log(personIndex)
+        const personIndex = this.state.persons.findIndex(person => person.userId === id);
+
         if (personIndex === undefined && personIndex === null) {
             return;
         }
@@ -66,13 +66,14 @@ class App extends Component {
             persons = (
                 <div>
                     {this.state.persons.map((person, index) => {
-                        return <Person
+                        return <ErrorBoundary>
                             key={index}
+                            <Person
                             click={this.deletePersonHandler.bind(this, index)}
                             name={person.name}
                             age={person.age}
                             change={(event) => this.changeNameHandler(event, person.id)}
-                        />
+                        /></ErrorBoundary>
                     })}
                 </div>
             );

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-// import './Person.css'
+import classes from  './Person.css'
 
 const StyledDiv = styled.div`
     width: 60%;
@@ -18,12 +18,18 @@ const StyledDiv = styled.div`
 
 const person = (props) => {
 
+    if (Math.random() > 0.7) {
+        throw new Error('Something went wrong');
+    }
+
     return (
         // <div className="Person" style={style}>
-        <StyledDiv>
+        // <StyledDiv>
+        <div className={classes.Person}>
             <p onClick={props.click}>Age: {props.age}, name: {props.name}</p>
             <input type="text" onChange={props.change} value={props.name} />
-        </StyledDiv>
+        </div>
+        // </StyledDiv>
     )
 }
 
