@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import classes from  './Person.css'
 import PropTypes from 'prop-types';
@@ -20,15 +20,24 @@ const StyledDiv = styled.div`
 
 const person = (props) => {
 
-    // if (Math.random() > 0.7) {
-    //     throw new Error('Something went wrong');
-    // }
+    const inputElementRef = useRef(null);
+
+    useEffect(() => {
+        inputElementRef.current.focus();
+    }, []);
+
     console.log('[Person.js] rendering...')
     return (
         // <div className="Person" style={style}>
         // <StyledDiv>
         [   <p key="123" onClick={props.click}>Age: {props.age}, name: {props.name}</p>,
-            <input key="456" type="text" onChange={props.change} value={props.name} />
+            <input 
+                key="456" 
+                type="text" 
+                ref={inputElementRef}
+                onChange={props.change} 
+                value={props.name} 
+            />
         ]
         // </StyledDiv>
     )
